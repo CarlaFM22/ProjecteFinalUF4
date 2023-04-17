@@ -3,12 +3,12 @@ package model;
 import java.time.LocalDate;
 
 public abstract class Persona {
-    private String nom;
-    private String cognom1;
-    private String cognom2;
-    private String dni;
-    private LocalDate dataNeixement;
-    private String sexe;
+    protected String nom;
+    protected String cognom1;
+    protected String cognom2;
+    protected String dni;
+    protected LocalDate dataNeixement;
+    protected String sexe;
 
     public Persona(String nom, String cognom1, String cognom2, String dni, LocalDate dataNeixement, String sexe) {
         this.nom = nom;
