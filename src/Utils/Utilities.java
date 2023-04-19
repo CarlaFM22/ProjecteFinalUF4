@@ -3,6 +3,8 @@ package Utils;
 import java.util.Scanner;
 
 public class Utilities {
+
+
     // L'atribut Scanner no ha de poder ser accedit des de fora
     private static final Scanner llegir = new Scanner(System.in);
 

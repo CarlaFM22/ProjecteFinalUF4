@@ -1,25 +1,35 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
-public abstract class Persona {
+public abstract class Persona implements InterificePerson {
     protected String nom;
-    protected String cognom1;
-    protected String cognom2;
-    protected String dni;
-    protected LocalDate dataNeixement;
     protected String sexe;
 
-    public Persona(String nom, String cognom1, String cognom2, String dni, LocalDate dataNeixement, String sexe) {
+    public Persona(String nom, String sexe) {
         this.nom = nom;
-        this.cognom1 = cognom1;
-        this.cognom2 = cognom2;
-        this.dni = dni;
-        this.dataNeixement = dataNeixement;
+
         this.sexe = sexe;
     }
+    public Persona()
+    {
 
-    public static void parlar(String misstge) {
-        System.out.println(misstge);
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
 }
