@@ -6,22 +6,29 @@ import java.util.ArrayList;
 
 public class Hospital {
     private float diners;
-    private int habitacionsMAX;
+
     ArrayList<Treballador> treballadors;
-    ArrayList<Pacient> malalts;
+    ArrayList<Habitacion> habitacions;
 
     public Hospital() {
       this.diners=5000;
-      this.habitacionsMAX=10;
+
       Cirurgia c1 = new Cirurgia("Carla","Dona",25,50,75,0);
       Metge m1= new Metge("Ramon","Home",50,75,0,25);
       Infermera i1 = new Infermera("Hector","Home",75,25,50,0);
       Serveis s1 = new Serveis("Tupac","Home",0,0,0,75);
-
+      this.treballadors = new ArrayList<Treballador>();
       treballadors.add(c1);
       treballadors.add(m1);
       treballadors.add(i1);
       treballadors.add(s1);
+
+      this.habitacions = new ArrayList<Habitacion>();
+      for (int i=0;i<10;i++)
+      {
+          this.habitacions.add(new Habitacion());
+      }
+      creapacient();
 
     }
 
@@ -35,41 +42,39 @@ public class Hospital {
     public void creapacient()
     {
 
-        int indice = (int)Math.random()* Pacient.nombres.length;
+        int indice = (int)(Math.random()* Pacient.nombres.length);
+
         String nom = Pacient.nombres[indice];
         String sexe="";
-        if(((int)Math.random()*2)+1 == 1) {
+        if(((int)(Math.random()*2)) == 1) {
             sexe = "Dona";
         }
         else
         {
             sexe="Home";
         }
-        indice = ((int)Math.random()*Malalties.values().length);
-        int indice2 = ((int)Math.random()*Sang.values().length);
+        indice = ((int)(Math.random()*Malalties.values().length));
+        int indice2 = ((int)(Math.random()*Sang.values().length));
+
 
 
         boolean done;
         int hab=0;
         do {
             done = true;
-            hab =((int)Math.random()*habitacionsMAX)+1;
-            for (int i = 0; i<malalts.size();i++)
+            hab =((int)(Math.random()*habitacions.size()));
+            if(habitacions.get(hab).getResident()!=null)
             {
-                if (malalts.get(i).getNumHabitacio()==hab)
-                {
-                    done = false;
-                    break;
-                }
+                done=false;
             }
         }while (!done);
-        int edat = (int) Math.random()*2;
+        int edat = (int) (Math.random()*2);
         if (edat==0)
         {
-            malalts.add(new Pacient(nom,sexe,Malalties.values()[indice],Sang.values()[indice2],hab,true));
+            habitacions.get(hab).setResident(new Pacient(nom,sexe,Malalties.values()[indice],Sang.values()[indice2],true));
         }
         else {
-            malalts.add(new Pacient(nom,sexe,Malalties.values()[indice],Sang.values()[indice2],hab,false));
+            habitacions.get(hab).setResident(new Pacient(nom,sexe,Malalties.values()[indice],Sang.values()[indice2],false));
         }
 
     }
@@ -82,12 +87,8 @@ public class Hospital {
         this.diners += diners;
     }
 
-    public int getHabitacions() {
-        return habitacionsMAX;
-    }
-
-    public void afegirHabitacions() {
-        this.habitacionsMAX ++;
+    public ArrayList<Habitacion> getHabitacions() {
+        return habitacions;
     }
 
     public ArrayList<Treballador> getTreballadors() {
@@ -98,11 +99,24 @@ public class Hospital {
         this.treballadors.add(treballador);
     }
 
-    public ArrayList<Pacient> getMalalts() {
-        return malalts;
+    public void addHabitacions(ArrayList<Habitacion> habitacions) {
+        Habitacion hab = new Habitacion();
+        this.habitacions.add(hab);
     }
 
-    public void afegirMalalts(Pacient malalts) {
-        this.malalts.add(malalts);
+    public int habitacionsplenes ()
+    {
+        int result = 0;
+
+        for (int i = 0; i < this.habitacions.size(); i++)
+        {
+            if (habitacions.get(i).getResident()!=null)
+            {
+                result++;
+            }
+        }
+        return result;
     }
+
+
 }

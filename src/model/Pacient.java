@@ -5,21 +5,28 @@ import java.time.LocalDate;
 public class Pacient extends Persona {
     private Malalties malaltia;
     private Sang tipusSang;
-    private int numHabitacio;
+    private int recompensa;
+
+    private final int recompinit = 20;
+    private estatHabitacion estat;
     private boolean esMajorEdat;
 
-    public Pacient(String nom, String sexe, Malalties malaltia, Sang tipusSang, int numHabitacio, boolean esMajorEdat) {
+    public Pacient(String nom, String sexe, Malalties malaltia, Sang tipusSang, boolean esMajorEdat) {
 
         super(nom, sexe);
         this.malaltia = malaltia;
         this.tipusSang = tipusSang;
-        this.numHabitacio = numHabitacio;
+        switch (this.malaltia)
+        {
+            case Lleu -> this.recompensa=recompinit;
+            case Mitj -> this.recompensa=recompinit*2;
+            case Greu -> this.recompensa=recompinit*3;
+        }
         this.esMajorEdat = esMajorEdat;
+        this.estat = estatHabitacion.NET;
     }
 
-    public int getNumHabitacio() {
-        return numHabitacio;
-    }
+
 
     public Malalties getMalaltia() {
         return malaltia;

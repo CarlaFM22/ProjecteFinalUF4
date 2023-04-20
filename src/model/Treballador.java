@@ -8,8 +8,9 @@ public class Treballador extends Persona{
 
     protected int p_infermer;
     protected int p_metge;
-    protected  int p_cirugia;
+    protected   int p_cirugia;
     protected int p_servei;
+
 
     protected float modificador;
 
@@ -20,6 +21,7 @@ public class Treballador extends Persona{
         this.p_cirugia = p_cirugia;
         this.p_servei = p_servei;
         this.modificador = modificador;
+
     }
 
     public Treballador(int p_infermer, int p_metge, int p_cirugia, int p_servei)
