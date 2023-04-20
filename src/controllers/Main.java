@@ -83,6 +83,8 @@ public class Main {
 
                     //si han pasat 3 dies pagar als treballadors
 
+                    //modificar estat habitacions
+
                     //pasar a seguent horari i generar malat nou
                     estado++;
                     if (estado>3)
