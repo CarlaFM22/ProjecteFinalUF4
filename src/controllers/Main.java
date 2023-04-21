@@ -38,13 +38,14 @@ public class Main {
                     do {
                         //llista de treballadors
                         general.llistaTreballadors();
-
                         //menu per selecionar un dels treballadors
                         opcio = Utilities.llegirInt("Selecciona el treballador que vols gestionar. 0-"+(general.getTreballadors().size()-1)+ " o "+general.getTreballadors().size()+" Per anar enrera \n",0,general.getTreballadors().size());
                         if (opcio!=general.getTreballadors().size())
                         {
                             int treballadorN = opcio;
+
                             System.out.println(general.getTreballadors().get(opcio).toString());
+                            general.getTreballadors().get(opcio).Hablar();
                             opcio = Utilities.llegirInt("Vols enviare el treballadaor a una habitacio SI(1) o NO(2)",1,2);
 
                             if (opcio==1)
