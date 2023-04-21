@@ -11,4 +11,17 @@ public class Cirurgia extends Treballador{
     public void Hablar() {
         System.out.println("A operar");;
     }
+
+    @Override
+    public String toString() {
+        return "Cirurgia{" +
+                "%infermer=" + p_infermer +
+                ", %metge=" + p_metge +
+                ", %cirugia=" + p_cirugia +
+                ", %servei=" + p_servei +
+                ", Habitacio asignada= "+habitacioasignada+
+                ", nom='" + nom + '\'' +
+                ", sexe='" + sexe + '\'' +
+                '}';
+    }
 }

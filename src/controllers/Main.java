@@ -31,38 +31,41 @@ public class Main {
             switch (opcio)
             {
                 case 1:
-                    System.out.println("Nº | NOM | ESTAT HABITACIO");
-                    //llista d'habitacions *exemple: Nºhabitacio | NomPacient ( si hi ha) | estat de la habitacio
-                    for (int i = 0; i< general.getHabitacions().size();i++)
-                    {
-                        System.out.println(i + " | "+general.getHabitacions().get(i).toString());
-                    }
+                    general.llistaHabitacions();
                     break;
                     //Menu para ir a visitar un paciente, el paciente te habla y puedes ver los datos del pacient
                 case 2:
-                    //llista de treballadors
-                    System.out.println("Nº | NOM | PROFESIO");
-                    for (int i = 0; i < general.getTreballadors().size();i++)
-                    {
-                        if (general.getTreballadors().get(i) instanceof Cirurgia )
+                    do {
+                        //llista de treballadors
+                        general.llistaTreballadors();
+
+                        //menu per selecionar un dels treballadors
+                        opcio = Utilities.llegirInt("Selecciona el treballador que vols gestionar. 0-"+(general.getTreballadors().size()-1)+ " o "+general.getTreballadors().size()+" Per anar enrera \n",0,general.getTreballadors().size());
+                        if (opcio!=general.getTreballadors().size())
                         {
-                            System.out.println(i+" | "+general.getTreballadors().get(i).getNom() + " | CIRUGIA");
-                        } else if (general.getTreballadors().get(i) instanceof Metge) {
-                            System.out.println(i+" | "+general.getTreballadors().get(i).getNom() + " | METGE/A");
-                        } else if (general.getTreballadors().get(i) instanceof Infermera) {
-                            System.out.println(i+" | "+general.getTreballadors().get(i).getNom() + " | INFERMER/A");
+                            int treballadorN = opcio;
+                            System.out.println(general.getTreballadors().get(opcio).toString());
+                            opcio = Utilities.llegirInt("Vols enviare el treballadaor a una habitacio SI(1) o NO(2)",1,2);
+
+                            if (opcio==1)
+                            {
+                                do {
+                                    //menu per poder enviar un treballador a una habitacio
+                                    opcio= Utilities.llegirInt("Selecciona la habitacio on vols enviar el treballador. 0-"+(general.getHabitacions().size()-1)+". o "+general.getHabitacions().size()+" per sortir",0,general.getHabitacions().size());
+
+                                    if (opcio!=general.getHabitacions().size())
+                                    {
+                                        general.getTreballadors().get(treballadorN).setHabitacioasignada(opcio);
+
+                                        System.out.println("El treballador "+ general.getTreballadors().get(treballadorN).getNom()+" treballara en la habitacio "+opcio);
+                                        opcio=general.getHabitacions().size();
+                                    }
+                                }while (opcio!= general.getHabitacions().size());
+                            }
                         }
-                        else {
-                            System.out.println(i+" | "+general.getTreballadors().get(i).getNom() + " | SERVEI");
-                        }
-
-                    }
-
-                    //menu per selecionar un dels treballadors
 
 
-                    //menu per poder enviar un treballador a una habitacio
-
+                    }while (opcio!=general.getTreballadors().size());
                     break;
                 case 3:
                     //segon menu on podem elegir comprar mes habitacions o contractar nou metge

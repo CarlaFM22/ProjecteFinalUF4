@@ -118,5 +118,36 @@ public class Hospital {
         return result;
     }
 
+    public void llistaHabitacions()
+    {
+        System.out.println("Nº | NOM | ESTAT HABITACIO");
+        //llista d'habitacions *exemple: Nºhabitacio | NomPacient ( si hi ha) | estat de la habitacio
+        for (int i = 0; i< habitacions.size();i++)
+        {
+            System.out.println(i + " | "+habitacions.get(i).toString());
+        }
+    }
+
+    public void llistaTreballadors()
+    {
+        System.out.println("Nº | NOM | PROFESIO");
+        for (int i = 0; i < treballadors.size();i++)
+        {
+            if (treballadors.get(i) instanceof Cirurgia )
+            {
+                System.out.println(i+" | "+treballadors.get(i).getNom() + " | CIRUGIA");
+            } else if (treballadors.get(i) instanceof Metge) {
+                System.out.println(i+" | "+treballadors.get(i).getNom() + " | METGE/A");
+            } else if (treballadors.get(i) instanceof Infermera) {
+                System.out.println(i+" | "+treballadors.get(i).getNom() + " | INFERMER/A");
+            }
+            else {
+                System.out.println(i+" | "+treballadors.get(i).getNom() + " | SERVEI");
+            }
+
+        }
+    }
+
+
 
 }

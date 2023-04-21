@@ -12,4 +12,17 @@ public class Metge extends Treballador{
     public void Hablar() {
         System.out.println("Estas una mica groc... pren aquesta pastilla");
     }
+
+    @Override
+    public String toString() {
+        return "Metge{" +
+                "%infermer=" + p_infermer +
+                ", %metge=" + p_metge +
+                ", %cirugia=" + p_cirugia +
+                ", %servei=" + p_servei +
+                ", Habitacio asignada= "+habitacioasignada+
+                ", nom='" + nom + '\'' +
+                ", sexe='" + sexe + '\'' +
+                '}';
+    }
 }
