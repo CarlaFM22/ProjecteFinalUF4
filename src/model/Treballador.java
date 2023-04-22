@@ -22,7 +22,7 @@ public class Treballador extends Persona{
         this.p_cirugia = p_cirugia;
         this.p_servei = p_servei;
         this.modificador = modificador;
-        habitacioasignada =0;
+        habitacioasignada =-1;
     }
 
     public Treballador(int p_infermer, int p_metge, int p_cirugia, int p_servei)
@@ -32,10 +32,28 @@ public class Treballador extends Persona{
         this.p_cirugia = p_cirugia;
         this.p_servei = p_servei;
         this.modificador = 0;
-        habitacioasignada =0;
+        habitacioasignada =-1;
     }
 
+    public int getP_infermer() {
+        return p_infermer;
+    }
 
+    public int getP_metge() {
+        return p_metge;
+    }
+
+    public int getP_cirugia() {
+        return p_cirugia;
+    }
+
+    public int getP_servei() {
+        return p_servei;
+    }
+
+    public int getHabitacioasignada() {
+        return habitacioasignada;
+    }
 
     public void setHabitacioasignada(int habitacioasignada) {
         this.habitacioasignada = habitacioasignada;

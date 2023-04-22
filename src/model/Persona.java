@@ -21,15 +21,5 @@ public abstract class Persona implements InterificePerson {
         return nom;
     }
 
-    public String getSexe() {
-        return sexe;
-    }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
-    }
 }

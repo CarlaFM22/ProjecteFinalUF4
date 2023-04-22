@@ -8,7 +8,6 @@ public class Pacient extends Persona {
     private int recompensa;
 
     private final int recompinit = 20;
-    private estatHabitacion estat;
     private boolean esMajorEdat;
 
     public Pacient(String nom, String sexe, Malalties malaltia, Sang tipusSang, boolean esMajorEdat) {
@@ -23,22 +22,17 @@ public class Pacient extends Persona {
             case Greu -> this.recompensa=recompinit*3;
         }
         this.esMajorEdat = esMajorEdat;
-        this.estat = estatHabitacion.NET;
     }
 
-
+    public int getRecompensa() {
+        return recompensa;
+    }
 
     public Malalties getMalaltia() {
         return malaltia;
     }
 
-    public Sang getTipusSang() {
-        return tipusSang;
-    }
 
-    public boolean isEsMajorEdat() {
-        return esMajorEdat;
-    }
 
     public void setMalaltia(Malalties malaltia) {
         this.malaltia = malaltia;
@@ -53,5 +47,17 @@ public class Pacient extends Persona {
             case Mitj -> System.out.println("Cogh cogh... que... tal doctor?");
             case Greu -> System.out.println("... *esta tan mal que no puede ni hablar*");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Pacient{" +
+                "malaltia=" + malaltia +
+                ", tipusSang=" + tipusSang +
+                ", recompensa=" + recompensa +
+                ", esMajorEdat=" + esMajorEdat +
+                ", nom='" + nom + '\'' +
+                ", sexe='" + sexe + '\'' +
+                '}';
     }
 }

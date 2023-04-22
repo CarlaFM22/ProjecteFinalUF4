@@ -41,7 +41,7 @@ public class Hospital {
 
     private Treballador createTreballador()
     {
-        Treballador rand= new Treballador((int)Math.random()*100,(int)Math.random()*100,(int)Math.random()*100,(int)Math.random()*100);
+        Treballador rand= new Treballador((int)(Math.random()*100),(int)(Math.random()*100),(int)(Math.random()*100),(int)(Math.random()*100));
 
         return rand;
     }
@@ -112,14 +112,8 @@ public class Hospital {
         return treballadors;
     }
 
-    public void afegirTreballadors(Treballador treballador) {
-        this.treballadors.add(treballador);
-    }
 
-    public void addHabitacions(ArrayList<Habitacion> habitacions) {
-        Habitacion hab = new Habitacion();
-        this.habitacions.add(hab);
-    }
+
 
     public int habitacionsplenes ()
     {
@@ -232,5 +226,106 @@ public class Hospital {
                 treballadors.add(new Serveis(Nom,Sexe,t.p_infermer,t.p_metge,t.p_cirugia,t.p_servei));
                 break;
         }
+    }
+
+    public void actualitzar()
+    {
+        for (int i =0; i<this.habitacions.size();i++)
+        {
+            //trobar si un treballador ha esta asignat aquesta habitacio
+            int idTreballador = habitacioAsignada(i);
+            //si en la habitacio tenim un pacient
+            if (this.habitacions.get(i).getResident()!=null)
+            {
+                int p_aumentarenferm=0;
+                int p_curar =0;
+                //intenar curar si hi ha un treballador assignat a l'habitacio que no sigui server
+                if (idTreballador!= this.habitacions.size() && false == this.treballadors.get(idTreballador) instanceof Serveis)
+                {
+
+                        switch (this.habitacions.get(i).getResident().getMalaltia()) {
+                            case Lleu -> p_curar += this.treballadors.get(idTreballador).getP_infermer();
+                            case Mitj -> p_curar += this.treballadors.get(idTreballador).getP_metge();
+                            case Greu -> p_curar += this.treballadors.get(idTreballador).getP_cirugia();
+                        }
+                        if ((int) (Math.random() * 100) <= p_curar) {
+                            switch (this.habitacions.get(i).getResident().getMalaltia()) {
+                                case Lleu:
+                                    System.out.println(this.habitacions.get(i).CURAT());
+                                    diners += this.habitacions.get(i).getResident().getRecompensa();
+                                    habitacions.get(i).setResident(null);
+                                    break;
+                                case Mitj:
+                                    this.habitacions.get(i).getResident().setMalaltia(Malalties.Lleu);
+                                    break;
+                                case Greu:
+                                    this.habitacions.get(i).getResident().setMalaltia(Malalties.Mitj);
+                                    break;
+                            }
+                        }
+
+                }
+                //si no tenim doctor % d'empitjora la malatia
+                else {
+                    switch (habitacions.get(i).getEstat()) {
+                        case NET -> p_aumentarenferm = 60;
+                        case POLS -> p_aumentarenferm = 40;
+                        case BRUT -> p_aumentarenferm = 50;
+                    }
+                    if ((int) (Math.random() * 100) > p_aumentarenferm) {
+                        switch (habitacions.get(i).getResident().getMalaltia()) {
+                            case Lleu:
+                                habitacions.get(i).getResident().setMalaltia(Malalties.Mitj);
+                                break;
+                            case Mitj:
+                                habitacions.get(i).getResident().setMalaltia(Malalties.Greu);
+                                break;
+                            case Greu:
+                                System.out.println(habitacions.get(i).MORT());
+                                diners -= habitacions.get(i).getResident().getRecompensa();
+                                habitacions.get(i).setResident(null);
+                                break;
+                        }
+                    }
+                }
+
+            }
+            //Update habitacions
+            int p_empitjora=0;
+            if (idTreballador!= this.habitacions.size())
+            {
+                if (treballadors.get(idTreballador) instanceof Serveis)
+                {
+                    p_empitjora+=treballadors.get(i).getP_servei();
+                }
+                if ((int) (Math.random() * 100) <= p_empitjora)
+                {
+                    switch (habitacions.get(i).getEstat())
+                    {
+                        case POLS -> habitacions.get(i).setEstat(estatHabitacion.NET);
+                        case BRUT -> habitacions.get(i).setEstat(estatHabitacion.POLS);
+                    }
+                }
+            }
+            else {
+                switch (habitacions.get(i).getEstat())
+                {
+                    case POLS -> habitacions.get(i).setEstat(estatHabitacion.BRUT);
+                    case NET -> habitacions.get(i).setEstat(estatHabitacion.POLS);
+                }
+            }
+
+        }
+    }
+    private int habitacioAsignada(int nHabitacio)
+    {
+        for (int i =0; i< this.treballadors.size();i++)
+        {
+            if (this.treballadors.get(i).getHabitacioasignada()==nHabitacio)
+            {
+                return i;
+            }
+        }
+        return this.habitacions.size();
     }
 }

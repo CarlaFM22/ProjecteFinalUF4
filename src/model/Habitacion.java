@@ -9,6 +9,14 @@ public class Habitacion {
         resident = null;
     }
 
+    public estatHabitacion getEstat() {
+        return estat;
+    }
+
+    public void setEstat(estatHabitacion estat) {
+        this.estat = estat;
+    }
+
     public Pacient getResident() {
         return resident;
     }
@@ -25,5 +33,14 @@ public class Habitacion {
         }
 
         return resident.getNom() + " | "+ estat;
+    }
+
+    public String CURAT()
+    {
+        return "FELICITATS HAS CURAT A "+resident.getNom();
+    }
+    public String MORT()
+    {
+        return "EL PACIENT "+ resident.getNom()+" HA MORT";
     }
 }

@@ -9,6 +9,16 @@ public class Main {
         int dies=3;
         Hospital general = new Hospital();
         int estado = 1;
+        System.out.println("TUTORIAL!!!!" +
+                "\nMira el teus pacients i despres asigna el treballador corresponent\n" +
+                "si esta en estat GREU asigna un personatge amb cirugia alt\n" +
+                "si esta MITJ assigna un amb metge alt\n" +
+                "si esta LLEU assigna un amb infermer alt\n" +
+                "PER CURAR O REDUIR DE NIVELL LA ENFERMETAT\n" +
+                "SI LES HABITACIONS ESTAN BRUTES ELS MALATES PODEN ACABAR TROBANTSE PITJOR" +
+                "Per evitar aixo, asigna treballadors de serveis per netejar" +
+                "SI UN TREBALLADOR JA ESTA ASSIGNAT A UNA HABITACIO NO LI POTS ASIGNAR UNA ALTRE PER AQUELL TURN" +
+                "CADA 3 DIES (9 cambis d'horari) HAS DE PAGAR ELS TEUS TREBALLADORS SI ESTAS AMB DINERS NEGATIUS ABANS DE PAGAR, PERDS");
         System.out.println("Benvingut al hospital general, jugador!");
         do {
             switch (estado)
@@ -34,7 +44,21 @@ public class Main {
             switch (opcio)
             {
                 case 1:
-                    general.llistaHabitacions();
+                    do {
+                        general.llistaHabitacions();
+                        opcio=Utilities.llegirInt("Selecciona la habitacio que vols visitar. 0-"+(general.getHabitacions().size()-1)+ " o "+general.getHabitacions().size() + " per sortir\n",0,general.getHabitacions().size());
+                        if (opcio!= general.getHabitacions().size())
+                        {
+                            if(general.getHabitacions().get(opcio).getResident()==null)
+                            {
+                                System.out.println("LA HABITACIO ESTA VUIDA");
+                            }
+                            else {
+                                general.getHabitacions().get(opcio).getResident().Hablar();
+                                System.out.println(general.getHabitacions().get(opcio).getResident().toString());
+                            }
+                        }
+                    }while (opcio!=general.getHabitacions().size());
                     break;
                     //Menu para ir a visitar un paciente, el paciente te habla y puedes ver los datos del pacient
                 case 2:
@@ -55,6 +79,7 @@ public class Main {
                             {
                                 do {
                                     //menu per poder enviar un treballador a una habitacio
+                                    general.llistaHabitacions();
                                     opcio= Utilities.llegirInt("Selecciona la habitacio on vols enviar el treballador. 0-"+(general.getHabitacions().size()-1)+". o "+general.getHabitacions().size()+" per sortir",0,general.getHabitacions().size());
 
                                     if (opcio!=general.getHabitacions().size())
@@ -103,7 +128,7 @@ public class Main {
                 case 4:
                     //modificar els estats de els pacients i rebre recompenses
 
-
+                    general.actualitzar();
                     //modificar estat habitacions
 
                     //pasar a seguent horari i generar malat nou
@@ -128,7 +153,7 @@ public class Main {
                     {
                         general.creapacient();
                     }
-
+                    general.setOportunitatReclut(3);
                     break;
                 case 5:
                     System.out.println("GRACIES PER JUGAR");
