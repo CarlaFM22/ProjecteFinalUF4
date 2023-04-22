@@ -8,6 +8,8 @@ public class Utilities {
     // L'atribut Scanner no ha de poder ser accedit des de fora
     private static final Scanner llegir = new Scanner(System.in);
 
+
+
     /**
      * El constructor private no permet crear objectes de la classe.
      * Tots els seus mètodes hauràn de ser a nivell de classe (static)

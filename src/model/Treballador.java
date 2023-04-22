@@ -36,14 +36,25 @@ public class Treballador extends Persona{
     }
 
 
+
     public void setHabitacioasignada(int habitacioasignada) {
         this.habitacioasignada = habitacioasignada;
     }
 
-    @Override
-    public void Hablar() {
-
+    public float getSou()
+    {
+        return souBase*modificador;
     }
+    @Override
+    public void Hablar() {   }
 
-
+    @Override
+    public String toString() {
+        return "Treballador{" +
+                "p_infermer=" + p_infermer +
+                ", p_metge=" + p_metge +
+                ", p_cirugia=" + p_cirugia +
+                ", p_servei=" + p_servei +
+                '}';
+    }
 }

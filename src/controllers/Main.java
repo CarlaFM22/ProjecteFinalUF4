@@ -1,14 +1,12 @@
 package controllers;
 
 import Utils.Utilities;
-import model.Cirurgia;
-import model.Hospital;
-import model.Infermera;
-import model.Metge;
+import model.*;
 
 public class Main {
     public static void main(String[] args) {
         boolean game = true;
+        int dies=3;
         Hospital general = new Hospital();
         int estado = 1;
         System.out.println("Benvingut al hospital general, jugador!");
@@ -27,6 +25,11 @@ public class Main {
             }
             System.out.println("NUMERO DE TRABALLADORS "+ general.getTreballadors().size());
             System.out.println("HABITACIONS PLENES "+ general.habitacionsplenes()+"/"+general.getHabitacions().size());
+            System.out.println("DINERS "+general.getDiners());
+            if (dies==3)
+            {
+                System.out.println("ES DIA DE PAGA, TINDRAS QUE PAGAR: "+general.aPagar()+" AL FINAL DEL DIA");
+            }
             int opcio = Utilities.llegirInt("Escull una de les seüents opcions:\n\t1-Mirar pacients\n\t2-Gestionar treballadors\n\t3-Gestionar Hospital\n\t4-Passar seguent horari\n\t5-Sortir\n",1,5);
             switch (opcio)
             {
@@ -71,21 +74,35 @@ public class Main {
                 case 3:
                     //segon menu on podem elegir comprar mes habitacions o contractar nou metge
 
-                    opcio = Utilities.llegirInt("SELECIONA UNA DE LES OPCIONS\n\t1-COMPRAR HABITACIO\n\t2-CONTRACTAR NOU METGE\n",1,2);
+                    opcio = Utilities.llegirInt("SELECIONA UNA DE LES OPCIONS\n\t1-COMPRAR HABITACIO\n\t2-CONTRACTAR NOU METGE\n\t3-TORNAR ENRERA\n\t ",1,3);
                     switch (opcio)
                     {
                         case 1:
                             //compra nova habitacio
+                            opcio = Utilities.llegirInt("Vols comprar una nova habitacio per "+ general.getPreuHabitacio() +"? SI(1) NO(2)\n\t",1,2);
+                            if (opcio==1)
+                            {
+                                   general.setDiners(-general.getPreuHabitacio());
+                                   general.getHabitacions().add(new Habitacion());
+                            }
                             break;
                         case 2:
                             //contractar nou metge, es crean 3 aleatoris i el jugarod seleciona 1 d'ells, que despres li donara una clase
+
+                            if (general.getOportunitatReclut()==0)
+                            {
+                                System.out.println("No pots reclutar mes avui");
+                            }
+                            else
+                            {
+                                general.Reclutar();
+                            }
                             break;
                     }
                     break;
                 case 4:
                     //modificar els estats de els pacients i rebre recompenses
 
-                    //si han pasat 3 dies pagar als treballadors
 
                     //modificar estat habitacions
 
@@ -94,6 +111,18 @@ public class Main {
                     if (estado>3)
                     {
                         estado=1;
+                        if (dies==3)
+                        {
+                            if (general.getDiners() <0)
+                            {
+                                System.out.println("GAME OVER");
+                                game=false;
+                            }
+                            general.setDiners(-general.aPagar());
+                            dies=0;
+                        }
+                        dies++;
+                        general.setOportunitatReclut(3);
                     }
                     if (general.habitacionsplenes() != general.getHabitacions().size())
                     {
