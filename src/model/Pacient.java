@@ -6,17 +6,14 @@ public class Pacient extends Persona {
     private Malalties malaltia;
     private Sang tipusSang;
     private int recompensa;
-
     private final int recompinit = 20;
     private boolean esMajorEdat;
 
     public Pacient(String nom, String sexe, Malalties malaltia, Sang tipusSang, boolean esMajorEdat) {
-
         super(nom, sexe);
         this.malaltia = malaltia;
         this.tipusSang = tipusSang;
-        switch (this.malaltia)
-        {
+        switch (this.malaltia) {
             case Lleu -> this.recompensa=recompinit;
             case Mitj -> this.recompensa=recompinit*2;
             case Greu -> this.recompensa=recompinit*3;
@@ -32,17 +29,13 @@ public class Pacient extends Persona {
         return malaltia;
     }
 
-
-
     public void setMalaltia(Malalties malaltia) {
         this.malaltia = malaltia;
     }
 
-
     @Override
     public void Hablar() {
-        switch (malaltia)
-        {
+        switch (malaltia) {
             case Lleu -> System.out.println("Buenos dias doctor");
             case Mitj -> System.out.println("Cogh cogh... que... tal doctor?");
             case Greu -> System.out.println("... *esta tan mal que no puede ni hablar*");

@@ -7,7 +7,6 @@ public class Cirurgia extends Treballador{
         super(nom, sexe, p_infermer, p_metge, p_cirugia, p_servei, 1.5f);
     }
 
-
     @Override
     public void Hablar() {
         System.out.println("A operar");;

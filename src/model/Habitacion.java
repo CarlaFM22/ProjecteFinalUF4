@@ -3,8 +3,7 @@ package model;
 public class Habitacion {
     private Pacient resident;
     private estatHabitacion estat;
-    public Habitacion()
-    {
+    public Habitacion() {
         estat = estatHabitacion.NET;
         resident = null;
     }
